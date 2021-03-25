@@ -1,0 +1,4 @@
+﻿  Cellular_Automata_Sol.cpp
+c:\users\spark_000\documents\visual studio 2015\projects\cellular_automata_sol\cellular_automata_sol\cellular_automata_sol.cpp(159): warning C4018: '<': signed/unsigned mismatch
+  Cellular_Automata_Sol.vcxproj -> c:\users\spark_000\documents\visual studio 2015\Projects\Cellular_Automata_Sol\Debug\Cellular_Automata_Sol.exe
+  Cellular_Automata_Sol.vcxproj -> c:\users\spark_000\documents\visual studio 2015\Projects\Cellular_Automata_Sol\Debug\Cellular_Automata_Sol.pdb (Full PDB)

@@ -1,0 +1,70 @@
+
+//  Created by Anand Venkataraman on 2/2/17.
+//  Copyright © 2017 Anand Venkataraman. All rights reserved.
+//
+
+#include <iostream>
+#include <sstream>
+#include <random>
+
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node *next;
+    
+public:
+    Node(int d) : data(d), next(NULL) {}
+    virtual ~Node() {}
+    
+    string toString() const {
+        ostringstream os; os << "[" << data << "]";
+        return os.str();
+    }
+};
+
+int main() {
+    const long TOTAL_NODES = 10*1000*1000; // 10MM nodes
+    const long LOOP_START_MAX = TOTAL_NODES / 10;
+    default_random_engine generator((unsigned int) time(0L));
+
+    uniform_int_distribution<long> distro1(1,LOOP_START_MAX);
+    const long loopStartAt = distro1(generator);
+    
+    uniform_int_distribution<long> distro2(LOOP_START_MAX+1,TOTAL_NODES);
+    const long loopBackAt = distro2(generator);
+
+    // Start making the list
+    Node *myList = new Node(0);
+    Node *startOfLoop = NULL;    // Start of the loop we'll create in this list
+    
+    Node *p = myList;
+    for (int i = 1; i <= TOTAL_NODES; i++) {
+        p->next = new Node(i);
+        
+        if (i == loopBackAt) {
+            p->next->next = startOfLoop;
+            break;
+        }
+
+        if (i == loopStartAt) {
+            startOfLoop = p->next; // Remember it
+        }
+
+        p = p->next;
+    }
+    
+    // TODO:
+    // Challenge: Find the start of the loop in the above list given myList.
+ 
+
+    // No need to delete the nodes because this is a contrived problem
+    // designed to show how memory leaks can happen. Normally, you'd not
+    // "lose" pointers to the wind like you do above. You'd clean up before
+    // you return (Clean up even in main() although the OS will do it for you
+    // if you forget. The reason is that if you (or someone) decides to make
+    // that code a re-usable function that's called several times, they don't
+    // have to write the clean up code. It's good practice and shows you're
+    // detail oriented - an important quality for SWEs)
+}
